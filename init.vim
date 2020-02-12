@@ -9,6 +9,8 @@ Plug 'fatih/vim-go'
 
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+Plug 'dragonsourced/simple.vim'
+
 call plug#end()
 
 " Use 4 spaces instead of tabs for all filetypes except C and Golang.
@@ -29,7 +31,7 @@ else
     set bg=light
 end
 
-" Custom color scheme that doesn't look like unicorn vomit.
+" A nice, barebones colorscheme.
 
 colorscheme simple
 
