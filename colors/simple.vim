@@ -33,7 +33,7 @@ hi clear Normal
 " Hides the post-buffer tildes.
 " Disable with `let g:simple#hide_tildes = 0` before loading the colorscheme.
 
-if !exists(g:simple#hide_tildes)
+if !exists("g:simple#hide_tildes")
     let g:simple#hide_tildes = 1
 end
 
