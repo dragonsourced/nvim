@@ -8,17 +8,6 @@
 hi clear
 let g:colors_name = "simple"
 
-" Checks for 256color support.
-"
-" I don't know how to do this 'properly' so I just assume it to be
-" the case everywhere except for TTYs.
-
-if $TERM ==# "linux"
-    let s:gui = 0
-else
-    let s:gui = 1
-end
-
 " Normal text shouldn't be styled at all. Ever.
 "
 " Unless you're some kind of masochist, in which case go ahead! Color your
