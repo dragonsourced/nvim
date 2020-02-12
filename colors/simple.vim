@@ -26,10 +26,12 @@ if !exists("g:simple#hide_tildes")
     let g:simple#hide_tildes = 1
 end
 
-if &background == "light"
-    hi EndOfBuffer ctermfg=white
-else
-    hi EndOfBuffer ctermfg=black
+if g:simple#hide_tildes
+    if &background == "light"
+        hi EndOfBuffer ctermfg=white
+    else
+        hi EndOfBuffer ctermfg=black
+    end
 end
 
 " Do you really need colors to tell these apart? Really?
