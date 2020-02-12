@@ -27,6 +27,7 @@ hi clear Comment
 hi clear Type
 hi clear PreProc
 hi clear Constant
+hi clear Special
 
 hi clear NonText
 
