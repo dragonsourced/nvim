@@ -2,13 +2,14 @@ call plug#begin()
 
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
+Plug 'fatih/vim-go'
 
 call plug#end()
 
 set clipboard+=unnamedplus
 set si et sw=4
 
-autocmd BufRead,BufNewFile *.c,*.h set noet sw=8
+autocmd BufRead,BufNewFile *.go,*.c,*.h set noet sw=8
 
 let s:hr = (strftime("%H"))
 
