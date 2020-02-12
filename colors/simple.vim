@@ -34,7 +34,7 @@ if g:simple#hide_tildes
     end
 end
 
-" Do you really need colors to tell these apart? Really?
+" Remove all the superfluous default stylings.
 
 hi clear Identifier
 hi clear SpecialKey
