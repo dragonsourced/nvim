@@ -1,41 +1,25 @@
 call plug#begin()
 
+Plug 'dragonsourced/simple.vim'
+
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go'
 
-Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-Plug 'dragonsourced/simple.vim'
+Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
 
 call plug#end()
 
-" Use 4 spaces instead of tabs for all filetypes except C and Golang.
-
 set clipboard+=unnamedplus
-set si et sw=4
-
-autocmd BufRead,BufNewFile *.go,*.c,*.h set noet sw=8
-
-" Past 1600 hours (4 pm) or in a TTY, use the dark theme.
-" Otherwise, use light.
-
-let s:hr = (strftime("%H"))
-
-if $TERM == "linux" || s:hr >= 16
-    set bg=dark
-else
-    set bg=light
-end
-
-" A nice, barebones colorscheme.
-
 colorscheme simple
 
-" Autocompletion should be default, yes.
-
 let g:deoplete#enable_at_startup = 1
-
-" <Tab> autocompletes.
-
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+set et sw=4
+
+autocmd BufRead,BufNewFile *.c,*.h,Makefile,*.mk set noet sw=8
+
+if executable('black')
+    autocmd BufWritePost *.py silent execute "!black %" | edit
+end
