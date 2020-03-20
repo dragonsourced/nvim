@@ -50,10 +50,14 @@ let s:file_size = 0
 autocmd BufRead,BufWritePost,BufNewFile * let s:file_size = getfsize(@%)
 
 fun! g:FileSize()
-    if s:file_size >= 100
+    if s:file_size >= 500000000
+        return string(floor((s:file_size/1000000000.0)*10)/10) . "G"
+    elseif s:file_size >= 500000
+        return string(floor((s:file_size/1000000.0)*10)/10) . "M"
+    elseif s:file_size >= 500
         return string(floor((s:file_size/1000.0)*10)/10) . "K"
     else
-        return string(s:file_size) . "B"
+        return string(s:file_size)
     end
 endfun
 
