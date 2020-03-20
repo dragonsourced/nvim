@@ -19,10 +19,15 @@ colorscheme simple
 
 set et sw=4 sts=4
 
-command WritingMode Goyo | set fo+=a
+fun! s:writing_mode()
+    set spell formatoptions+=a
+    Goyo
+endfun
 
-autocmd! BufRead,BufNewFile *.c,*.h,Makefile,*.mk,*.go set noet sw=8 sts=8
-autocmd! BufRead,BufNewFile *.md  WritingMode
+com! WritingMode call s:writing_mode()
+
+autocmd BufRead,BufNewFile *.md WritingMode
+autocmd BufRead,BufNewFile *.c,*.h,Makefile,*.mk,*.go set noet sw=8 sts=8
 
 autocmd! User GoyoLeave nested quit
 
