@@ -18,7 +18,11 @@ call plug#end()
 set clipboard+=unnamedplus
 colorscheme simple
 
+" For for most filetypes, use 4 spaces instead of tabs.
+
 set et sw=4 sts=4
+
+" Nice little setup for writing things.
 
 fun! s:writing_mode()
     set spell formatoptions+=a
@@ -33,9 +37,7 @@ autocmd BufRead,BufNewFile *.c,*.h,Makefile,*.mk,*.go set noet sw=8 sts=8
 
 autocmd! User GoyoLeave nested quit
 
-if executable('black')
-    autocmd BufWritePost *.py silent execute "!black %" | edit
-end
+" Statusline stuff.
 
 fun! g:FileType()
     if $WINDOWID == ""
@@ -65,18 +67,30 @@ fun! g:Statusline()
     return " %f%m (%l/%L) %= %{gutentags#statusline()} %{FileSize()} %{toupper(&encoding)} %{FileType()} "
 endfun
 
-set showtabline=2
 set statusline=%!g:Statusline()
+
+" Keep the cursor centered.
 set scrolloff=999
-set fdc=1
+
+" Provides a nice 1-character gap between the text and the
+" left side of the screen.
+set foldcolumn=1
 
 let g:gutentags_cache_dir = "~/.config/nvim/tags"
+
+" Stuff for tabs
+
+set showtabline=2
 
 nnoremap <silent> <C-t> :tabnew<CR>
 nnoremap <silent> <C-l> :tabnext<CR>
 nnoremap <silent> <C-h> :tabprev<CR>
 nnoremap <silent> <S-h> :-tabmove<CR>
 nnoremap <silent> <S-l> :+tabmove<CR>
+
+" Theme varies depending on the value of /tmp/theme, which I
+" use in my other scripts. Also, instead of a standard ColorColumn I instead
+" color everything past 80 characters.
 
 let s:theme = system("cat /tmp/theme | tr -d '\n'")
 
@@ -90,6 +104,22 @@ end
 
 let &colorcolumn = join(range(81,999),",")
 
-command -nargs=* Snip iabbrev <silent> <args><Esc>:call search("_", "b")<CR>x<Left>i
+" Homebrewed snippets system.
 
-Snip fori for (int i = 0; i < _; ++i)
+fun g:EatChar()
+    call getchar(0)
+    startinsert
+endfun
+
+command -nargs=* Snip iabbrev <silent> <args><Esc>:call search("_", "b")<CR>x<Esc>:call g:EatChar()<CR>
+
+fun s:load_snip()
+    let s:snip_file = expand("~/.config/nvim/snip/" . &filetype . ".vim")
+    if file_readable(s:snip_file)
+        execute("source " . s:snip_file)
+    end
+endfun
+
+command LoadSnippets call s:load_snip()
+
+autocmd BufRead,BufNewFile * call s:load_snip()
