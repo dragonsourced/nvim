@@ -32,11 +32,12 @@ function! g:FileType()
 endfunction
 
 function! g:Statusline()
-    return "%f%m (%l/%L) %= %{gutentags#statusline()} %c %{FileType()} "
+    return " %f%m (%l/%L) %= %{gutentags#statusline()} %{toupper(&encoding)} %{FileType()} "
 endfunction
 
 set statusline=%!g:Statusline()
 set scrolloff=999
+set fdc=1
 
 let g:gutentags_cache_dir = "~/.config/nvim/tags"
 
