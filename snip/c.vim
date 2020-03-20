@@ -5,5 +5,7 @@ Snip prf  printf(_);
 
 Snip struc struct _ {<CR>};
 
+Snip prag1 #pragma once<CR>_
+
 Snip _io  #include <stdio.h><CR>_
 Snip _lib #include <stdlib.h><CR>_
