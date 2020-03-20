@@ -37,18 +37,31 @@ if executable('black')
     autocmd BufWritePost *.py silent execute "!black %" | edit
 end
 
-function! g:FileType()
+fun! g:FileType()
     if $WINDOWID == ""
         return "[" . &filetype . "]"
     else
         return WebDevIconsGetFileTypeSymbol()
     end
-endfunction
+endfun
 
-function! g:Statusline()
-    return " %f%m (%l/%L) %= %{gutentags#statusline()} %{toupper(&encoding)} %{FileType()} "
-endfunction
+let s:file_size = 0
 
+autocmd BufRead,BufWritePost,BufNewFile * let s:file_size = getfsize(@%)
+
+fun! g:FileSize()
+    if s:file_size >= 100
+        return string(floor((s:file_size/1000.0)*10)/10) . "K"
+    else
+        return string(s:file_size) . "B"
+    end
+endfun
+
+fun! g:Statusline()
+    return " %f%m (%l/%L) %= %{gutentags#statusline()} %{FileSize()} %{toupper(&encoding)} %{FileType()} "
+endfun
+
+set showtabline=2
 set statusline=%!g:Statusline()
 set scrolloff=999
 set fdc=1
@@ -65,6 +78,14 @@ let s:theme = system("cat /tmp/theme | tr -d '\n'")
 
 if s:theme == "light" && $TERM != "linux"
     set background=light
+    hi Colorcolumn ctermbg=255
 else
     set background=dark
+    hi Colorcolumn ctermbg=235
 end
+
+let &colorcolumn = join(range(81,999),",")
+
+command -nargs=* Snip iabbrev <silent> <args><Esc>:call search("_", "b")<CR>x<Left>i
+
+Snip fori for (int i = 0; i < _; ++i)
