@@ -5,6 +5,8 @@ Plug 'dragonsourced/simple.vim'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 
+Plug 'junegunn/goyo.vim'
+
 Plug 'ajh17/VimCompletesMe'
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -17,7 +19,12 @@ colorscheme simple
 
 set et sw=4 sts=4
 
-autocmd BufRead,BufNewFile *.c,*.h,Makefile,*.mk,*.go set noet sw=8 sts=8
+command WritingMode Goyo | set fo+=a
+
+autocmd! BufRead,BufNewFile *.c,*.h,Makefile,*.mk,*.go set noet sw=8 sts=8
+autocmd! BufRead,BufNewFile *.md  WritingMode
+
+autocmd! User GoyoLeave nested quit
 
 if executable('black')
     autocmd BufWritePost *.py silent execute "!black %" | edit
