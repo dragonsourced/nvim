@@ -61,9 +61,9 @@ nnoremap <silent> <C-h> :tabprev<CR>
 nnoremap <silent> <S-h> :-tabmove<CR>
 nnoremap <silent> <S-l> :+tabmove<CR>
 
-let s:hour = strftime("%H")
+let s:theme = system("cat /tmp/theme | tr -d '\n'")
 
-if s:hour < 17
+if s:theme == "light"
     set background=light
 else
     set background=dark
