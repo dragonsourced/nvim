@@ -63,7 +63,7 @@ nnoremap <silent> <S-l> :+tabmove<CR>
 
 let s:theme = system("cat /tmp/theme | tr -d '\n'")
 
-if s:theme == "light"
+if s:theme == "light" && $TERM != "linux"
     set background=light
 else
     set background=dark
