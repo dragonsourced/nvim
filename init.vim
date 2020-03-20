@@ -60,3 +60,11 @@ nnoremap <silent> <C-l> :tabnext<CR>
 nnoremap <silent> <C-h> :tabprev<CR>
 nnoremap <silent> <S-h> :-tabmove<CR>
 nnoremap <silent> <S-l> :+tabmove<CR>
+
+let s:hour = strftime("%H")
+
+if s:hour < 17
+    set background=light
+else
+    set background=dark
+end
