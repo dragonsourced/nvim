@@ -6,6 +6,7 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 
 Plug 'junegunn/goyo.vim'
+Plug 'reedes/vim-pencil'
 
 Plug 'ajh17/VimCompletesMe'
 Plug 'ludovicchabant/vim-gutentags'
@@ -22,6 +23,7 @@ set et sw=4 sts=4
 fun! s:writing_mode()
     set spell formatoptions+=a
     Goyo
+    PencilSoft
 endfun
 
 com! WritingMode call s:writing_mode()
