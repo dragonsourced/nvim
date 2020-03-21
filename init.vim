@@ -80,8 +80,6 @@ let g:gutentags_cache_dir = "~/.config/nvim/tags"
 
 " Stuff for tabs
 
-set showtabline=2
-
 nnoremap <silent> <C-t> :tabnew<CR>
 nnoremap <silent> <C-l> :tabnext<CR>
 nnoremap <silent> <C-h> :tabprev<CR>
