@@ -87,17 +87,24 @@ nnoremap <silent> <S-h> :-tabmove<CR>
 nnoremap <silent> <S-l> :+tabmove<CR>
 
 " Theme varies depending on the value of /tmp/theme, which I
-" use in my other scripts. Also, instead of a standard ColorColumn I instead
-" color everything past 80 characters.
+" use in my other scripts.
 
 let s:theme = system("cat /tmp/theme | tr -d '\n'")
 
 if s:theme == "light" && $TERM != "linux"
     set background=light
-    hi Colorcolumn ctermbg=255
 else
     set background=dark
-    hi Colorcolumn ctermbg=235
+end
+
+" Color stuff past 80 characters.
+
+if $TERM != "linux"
+    if s:theme == "light"
+        hi Colorcolumn ctermbg=255
+    else
+        hi Colorcolumn ctermbg=235
+    end
 end
 
 let &colorcolumn = join(range(81,999),",")
