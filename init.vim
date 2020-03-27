@@ -128,3 +128,7 @@ endfun
 command LoadSnippets call s:load_snip()
 
 autocmd BufRead,BufNewFile * call s:load_snip()
+
+" Other things.
+
+nnoremap <silent> D :ALEDetail<CR>
